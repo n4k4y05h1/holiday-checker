@@ -1,0 +1,167 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem 0;
+}
+
+.card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    position: relative; /* For positioning the language switcher */
+}
+
+.language-switcher {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.lang-button {
+    padding: 0.3rem 0.6rem;
+    border: none;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.8rem;
+}
+
+.lang-button:hover {
+    background-color: #e9ecef;
+}
+
+.lang-button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem; /* Add margin to avoid overlap with switcher */
+}
+
+.country-selector {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.country-button {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    font-size: 0.8rem;
+}
+
+.country-button:hover {
+    background-color: #e9ecef;
+}
+
+.country-button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.flag-icon {
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+.result-section {
+    text-align: left;
+    margin-top: 1.5rem;
+}
+
+.info-block {
+    margin-bottom: 1.5rem;
+}
+
+.info-block:last-child {
+    margin-bottom: 0;
+}
+
+.info-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 0.5rem 0;
+}
+
+.result-content {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    margin: 0;
+    padding-left: 1rem; /* Indent the result */
+}
+
+.result-content.holiday {
+    color: #dc3545;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 600px) {
+    body {
+        padding: 0;
+        align-items: flex-start;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        padding: 1.5rem 1rem;
+        box-shadow: none;
+        min-height: 100vh;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .country-selector {
+        gap: 0.4rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .country-button {
+        padding: 0.2rem 0.5rem;
+        font-size: 0.75rem;
+        gap: 0.25rem;
+    }
+    
+    .flag-icon {
+        font-size: 1.2rem;
+    }
+
+    .info-title {
+        font-size: 1rem;
+    }
+
+    .result-content {
+        font-size: 1.2rem;
+    }
+}
