@@ -2,6 +2,10 @@
 
 This project is a React application built with Vite and TypeScript. It allows users to check public holidays for various countries, displaying information for today, tomorrow, and the next upcoming holiday.
 
+## Demo
+
+Visit the live application: https://holiday-checker.pages.dev/
+
 ## Features
 
 *   **Holiday Information:** Displays whether today or tomorrow is a weekday, weekend, or a public holiday.
