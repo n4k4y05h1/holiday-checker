@@ -88,9 +88,11 @@ function App() {
   const [tomorrowDate, setTomorrowDate] = useState(new Date());
 
   useEffect(() => {
-    setTodayDate(new Date());
-    const tomorrow = new Date();
-    tomorrow.setDate(new Date().getDate() + 1);
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    setTodayDate(today);
     setTomorrowDate(tomorrow);
 
     const fetchHolidays = async () => {
@@ -99,7 +101,7 @@ function App() {
       setNextDayInfo(t.loading);
       setNextHoliday(t.loading);
       try {
-        const year = todayDate.getFullYear();
+        const year = today.getFullYear();
         const [response, nextYearResponse] = await Promise.all([
           fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/${country}`),
           fetch(`https://date.nager.at/api/v3/PublicHolidays/${year + 1}/${country}`),
@@ -113,31 +115,31 @@ function App() {
         const allHolidays = [...holidays, ...nextYearHolidays];
 
         // Today's status
-        const todayString = `${todayDate.getFullYear()}-${(todayDate.getMonth() + 1).toString().padStart(2, '0')}-${todayDate.getDate().toString().padStart(2, '0')}`;
+        const todayString = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
         const todayHoliday = allHolidays.find(h => h.date === todayString);
         if (todayHoliday) {
           const holidayName = lang === 'jp' ? todayHoliday.localName : todayHoliday.name;
           setTodayInfo(`${t.holiday} (${holidayName})`);
-        } else if (todayDate.getDay() === 0 || todayDate.getDay() === 6) {
+        } else if (today.getDay() === 0 || today.getDay() === 6) {
           setTodayInfo(t.weekend);
         } else {
           setTodayInfo(t.weekday);
         }
 
         // Tomorrow's status
-        const tomorrowString = `${tomorrowDate.getFullYear()}-${(tomorrowDate.getMonth() + 1).toString().padStart(2, '0')}-${tomorrowDate.getDate().toString().padStart(2, '0')}`;
+        const tomorrowString = `${tomorrow.getFullYear()}-${(tomorrow.getMonth() + 1).toString().padStart(2, '0')}-${tomorrow.getDate().toString().padStart(2, '0')}`;
         const tomorrowHoliday = allHolidays.find(h => h.date === tomorrowString);
         if (tomorrowHoliday) {
             const holidayName = lang === 'jp' ? tomorrowHoliday.localName : tomorrowHoliday.name;
             setNextDayInfo(`${t.holiday} (${holidayName})`);
-        } else if (tomorrowDate.getDay() === 0 || tomorrowDate.getDay() === 6) {
+        } else if (tomorrow.getDay() === 0 || tomorrow.getDay() === 6) {
           setNextDayInfo(t.weekend);
         } else {
           setNextDayInfo(t.weekday);
         }
 
         // Next holiday
-        const upcomingHolidays = allHolidays.filter(h => new Date(h.date) > todayDate);
+        const upcomingHolidays = allHolidays.filter(h => new Date(h.date) > today);
         if (upcomingHolidays.length > 0) {
           const next = upcomingHolidays[0];
           const date = new Date(next.date);
